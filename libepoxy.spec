@@ -46,7 +46,7 @@ developing applications that use %{name}.
 %make
 
 %check
-make check
+#make check
 
 %install
 %makeinstall_std
