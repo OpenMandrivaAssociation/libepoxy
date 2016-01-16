@@ -9,7 +9,7 @@ Version:	1.3.1
 Release:	1
 License:	MIT
 URL:		http://github.com/anholt/libepoxy
-Source0:	https://codeload.github.com/anholt/libepoxy/tar.gz/v%{version}/%{name}-%{version}.tar.gz
+Source0:	https://codeload.github.com/anholt/libepoxy/tar.gz/v%{version}/%{name}-%{version}.tar.bz2
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(egl)
 BuildRequires:	x11-util-macros
@@ -38,8 +38,6 @@ developing applications that use %{name}.
 %setup -q
 
 %build
-./autogen.sh
-
 %configure \
 	--disable-silent-rules
 
