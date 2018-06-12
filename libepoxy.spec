@@ -5,7 +5,7 @@
 Summary:	Direct Rendering Manager runtime library
 Name:		libepoxy
 Group:		System/Libraries
-Version:	1.5.1
+Version:	1.5.2
 Release:	1
 License:	MIT
 URL:		http://github.com/anholt/libepoxy
