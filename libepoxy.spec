@@ -13,7 +13,7 @@ Source0:	https://github.com/anholt/libepoxy/releases/download/%{version}/libepox
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(egl)
 BuildRequires:	x11-util-macros
-BuildRequires:	python3
+BuildRequires:	meson
 
 %description
 A library for handling OpenGL function pointer management.
@@ -38,16 +38,14 @@ developing applications that use %{name}.
 %autosetup -p1
 
 %build
-%configure \
-	--disable-silent-rules
-
-%make_build
+%meson
+%meson_build
 
 #check
 #make check
 
 %install
-%make_install
+%meson_install
 find %{buildroot} -type f -name '*.la' -delete -print
 
 %files -n %{libname}
