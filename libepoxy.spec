@@ -5,7 +5,7 @@
 Summary:	Direct Rendering Manager runtime library
 Name:		libepoxy
 Group:		System/Libraries
-Version:	1.5.2
+Version:	1.5.3
 Release:	1
 License:	MIT
 URL:		http://github.com/anholt/libepoxy
@@ -35,19 +35,19 @@ This package contains libraries and header files for
 developing applications that use %{name}.
 
 %prep
-%setup -q
+%autosetup -p1
 
 %build
 %configure \
 	--disable-silent-rules
 
-%make
+%make_build
 
 #check
 #make check
 
 %install
-%makeinstall_std
+%make_install
 find %{buildroot} -type f -name '*.la' -delete -print
 
 %files -n %{libname}
