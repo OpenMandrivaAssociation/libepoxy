@@ -2,11 +2,13 @@
 %define libname %mklibname epoxy %major
 %define develname %mklibname -d epoxy
 
+%global optflags %{optflags} -O3
+
 Summary:	Direct Rendering Manager runtime library
 Name:		libepoxy
 Group:		System/Libraries
 Version:	1.5.3
-Release:	3
+Release:	4
 License:	MIT
 URL:		http://github.com/anholt/libepoxy
 Source0:	https://github.com/anholt/libepoxy/releases/download/%{version}/libepoxy-%{version}.tar.xz
