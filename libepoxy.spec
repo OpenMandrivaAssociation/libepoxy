@@ -1,6 +1,13 @@
+# libepoxy is used by gtk-3.0, gtk-3.0 is used by wine
+%ifarch %{x86_64}
+%bcond_without compat32
+%endif
+
 %global major 0
 %define libname %mklibname epoxy %major
 %define develname %mklibname -d epoxy
+%define lib32name %mklib32name epoxy %major
+%define devel32name %mklib32name -d epoxy
 
 %global optflags %{optflags} -O3
 
@@ -8,7 +15,7 @@ Summary:	Direct Rendering Manager runtime library
 Name:		libepoxy
 Group:		System/Libraries
 Version:	1.5.4
-Release:	1
+Release:	2
 License:	MIT
 URL:		http://github.com/anholt/libepoxy
 Source0:	https://github.com/anholt/libepoxy/releases/download/%{version}/libepoxy-%{version}.tar.xz
@@ -19,6 +26,11 @@ BuildRequires:	pkgconfig(egl)
 BuildRequires:	pkgconfig(glesv2)
 BuildRequires:	x11-util-macros
 BuildRequires:	meson
+%if %{with compat32}
+BuildRequires:	devel(libGL)
+BuildRequires:	devel(libEGL)
+BuildRequires:	devel(libGLESv2)
+%endif
 
 %description
 A library for handling OpenGL function pointer management.
@@ -39,16 +51,43 @@ Requires:	%{libname} = %{version}-%{release}
 This package contains libraries and header files for
 developing applications that use %{name}.
 
+%if %{with compat32}
+%package -n %{lib32name}
+Summary: Direct Rendering Manager runtime library (32-bit)
+Group: System/Libraries
+
+%description -n %{lib32name}
+A library for handling OpenGL function pointer management.
+
+%package -n %{devel32name}
+Summary:	Development files for libepoxy
+Group:		Development/C
+Requires:	%{develname} = %{version}-%{release}
+Requires:	%{lib32name} = %{version}-%{release}
+
+%description -n %{devel32name}
+This package contains libraries and header files for
+developing applications that use %{name}.
+%endif
+
 %prep
 %autosetup -p1
+%if %{with compat32}
+%meson32
+%endif
+%meson
 
 %build
-%meson
+%if %{with compat32}
+%ninja_build -C build32
+%endif
 %meson_build
 
 %install
+%if %{with compat32}
+%ninja_install -C build32
+%endif
 %meson_install
-find %{buildroot} -type f -name '*.la' -delete -print
 
 %files -n %{libname}
 %{_libdir}/libepoxy.so.%{major}*
@@ -59,3 +98,12 @@ find %{buildroot} -type f -name '*.la' -delete -print
 %{_includedir}/epoxy/*
 %{_libdir}/libepoxy.so
 %{_libdir}/pkgconfig/epoxy.pc
+
+%if %{with compat32}
+%files -n %{lib32name}
+%{_prefix}/lib/libepoxy.so.%{major}*
+
+%files -n %{devel32name}
+%{_prefix}/lib/libepoxy.so
+%{_prefix}/lib/pkgconfig/epoxy.pc
+%endif
