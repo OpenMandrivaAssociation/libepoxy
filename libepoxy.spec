@@ -27,6 +27,7 @@ BuildRequires:	pkgconfig(glesv2)
 BuildRequires:	x11-util-macros
 BuildRequires:	meson
 %if %{with compat32}
+BuildRequires:	libc6
 BuildRequires:	devel(libGL)
 BuildRequires:	devel(libEGL)
 BuildRequires:	devel(libGLESv2)
