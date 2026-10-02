@@ -28,6 +28,7 @@ BuildRequires:	x11-util-macros
 BuildRequires:	meson
 %if %{with compat32}
 BuildRequires:	libc6
+BuildRequires:  atomic-devel
 BuildRequires:	devel(libGL)
 BuildRequires:	devel(libEGL)
 BuildRequires:	devel(libGLESv2)
