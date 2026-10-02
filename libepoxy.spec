@@ -32,6 +32,11 @@ BuildRequires:  atomic-devel
 BuildRequires:	devel(libGL)
 BuildRequires:	devel(libEGL)
 BuildRequires:	devel(libGLESv2)
+BuildRequires:	cross-i686-openmandriva-linux-gnu-binutils
+BuildRequires:	cross-i686-openmandriva-linux-gnu-libc
+BuildRequires:	cross-i686-openmandriva-linux-gnu-gcc
+BuildRequires:	cross-i686-openmandriva-linux-gnu-kernel-headers
+BuildRequires:	cross-i686-openmandriva-linux-gnu-clang
 %endif
 
 %description
